@@ -4,8 +4,18 @@ Generate hardening_manifest.yaml for python3.6 and python3.8 dependencies per Ir
 
 # Usage
 
+##### R
+
+Place your target libraries inside build/r/scripts/download_deps.R and then run:
+
+```
+$ ./r_get_deps.sh
+```
+
+##### Python
+
 ```bash
-$ ./get_deps.sh PYTHON_VERSION PACKAGE_NAME
+$ ./python_get_deps.sh PYTHON_VERSION PACKAGE_NAME
 ```
 
 ```bash
