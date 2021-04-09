@@ -13,11 +13,11 @@ fi
 
 python3 -m pip install -r requirements/requirements.txt --user
 
-docker build --build-arg VERSION=$1 --tag download-deps .
-docker run -v $(pwd)/repo:/tmp -e PACKAGE=$2 download-deps
+docker build --build-arg VERSION=$1 --tag python-download-deps ./build/python
+docker run -v $(pwd)/repo:/tmp -e PACKAGE=$2 python-download-deps
 
 # parse URL's list and generate the hardening_manifest.yaml
-python3 scripts/generate_hardening_manifest.py 
+python3 scripts/python-hm-resources.py 
 
 # cleanup
 rm -f repo/urls 
