@@ -3,6 +3,7 @@ import yaml
 
 # debug
 import sys
+import pprint
 
 #######################################################################################################################
 # This script parses the repo/urls file for package names, their pip-retrieved urls, and sha256 hashes.               #
@@ -28,19 +29,23 @@ def extractPackageData():
         return checksum_tuples
 
 def writePackageData(checksum_tuples: list):
-    resources = [{"resources":[]}]   
+    resources = {"resources":[]}
+    pp = pprint.PrettyPrinter(indent = 4)   
+    pp.pprint(checksum_tuples)
+    print(len(checksum_tuples))
     with open("hardening_manifest.yaml", "a") as manifest:
         for i in range(len(checksum_tuples)):
             url, filename, hash = checksum_tuples[i][0], checksum_tuples[i][1], checksum_tuples[i][2].strip()
-            metadata = {"filename":filename,"url":url,"validation":{"type":"sha256","value":hash}}
-            resources[0]["resources"].append(metadata)
+            resources["resources"].append({'filename': filename, 'url': url, 'validation':{'type': 'sha256', 'value': hash}})
 
         # append the created yaml to the hardening_manifest.yaml
         yaml.dump(resources, manifest)
 
         
 def main():
+    print("extracting package data from URLs")
     checksum_tuples = extractPackageData()  
+    print("writing the package data to hardening_manifest.yaml")
     writePackageData(checksum_tuples)
 
 main()

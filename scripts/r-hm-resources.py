@@ -53,17 +53,6 @@ def main():
     
 
 main()
-# with open("hardening_manifest.yaml") as f:
-#     data = yaml.load(f, Loader=yaml.FullLoader)
-
-# for i in range(len(data["resources"])):
-#     filename = data["resources"][i]["filename"]
-#     sha256sum = hashme(filename)
-#     data["resources"][i]["validation"]["type"] = "sha256"
-#     data["resources"][i]["validation"]["value"] = sha256sum
-
-# with open("hardening_manifest.yaml", "w") as nf:
-#     yaml.dump(data, nf)
 
     
 
